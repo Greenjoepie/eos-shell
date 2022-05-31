@@ -1,0 +1,24 @@
+#!/etc/bin/env bash
+
+if [ -z "$1" ]
+then echo "No file specified"
+else
+case $1 in
+
+    *.py)
+        python $1
+        ;;
+
+    *.sh)
+        bash $1
+        ;;
+
+    *.cc)
+        cat $1
+        ;;
+    *)
+        echo "Incorrect file type or path"
+        ;;
+
+esac
+fi

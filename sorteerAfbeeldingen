@@ -1,0 +1,17 @@
+#!/etc/bin/env bash
+if [ -z "$1" ]
+then echo "No directory specified"
+else
+
+if [ ! -d "./Afbeeldingen" ]
+then mkdir Afbeeldingen
+fi
+
+for file in $(find $1 -name *.jpg)
+do cp $file ./Afbeeldingen
+done
+for file in $(find $1 -name *.png)
+do cp $file ./Afbeeldingen
+done
+fi
+
