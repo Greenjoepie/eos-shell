@@ -1,0 +1,12 @@
+#!/etc/bin/env bash
+
+if [ -z "$1" ]
+then echo "No directory specified"
+else
+
+for file in $(find $1 -name *.jpg)
+do magick convert -resize '128x128' $file ${file:0:-4}.png
+rm $file
+done
+fi
+
