@@ -1,0 +1,22 @@
+#!/etc/bin/env bash
+if [ $# == 1 ]; then
+read -p "Enter your username: " NAME
+
+while true; do
+read -p "Enter your password: " PASSWORD
+if (( ${#PASSWORD} < 8 )); then
+echo "Password is not 8 characters long"; continue
+fi
+read -p "Repeat your password: " REPEAT
+
+if [ $PASSWORD == $REPEAT ]; then
+echo "login created"
+MD5=($(echo -n $PASSWORD | md5sum))
+echo "${NAME}:${MD5}" >> $1; break
+else echo "Passwords do not match"; continue
+fi
+
+done
+
+else echo "No output file given"
+fi
