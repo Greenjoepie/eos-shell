@@ -1,0 +1,16 @@
+#!/etc/bin/env bash
+if [ $# == 3 ]; then
+if [ ! -d $1 ]; then echo "No directory specified"
+else
+echo > $3
+for file in $(find $1); do
+$($2 $file > /dev/null)
+if [ $? == 0 ]; then
+echo "${file}: Success" >> $3
+else echo "${file}: Failure" >> $3
+fi
+done
+fi
+
+else echo "Invalid number of arguments (expected 3, got $#)"
+fi
