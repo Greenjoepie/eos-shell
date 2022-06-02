@@ -4,7 +4,7 @@ if [ ! -d $1 ]; then echo "No directory specified"
 else
 echo > $3
 for file in $(find $1); do
-$($2 $file > /dev/null)
+$($2 $file &> /dev/null)
 if [ $? == 0 ]; then
 echo "${file}: Success" >> $3
 else echo "${file}: Failure" >> $3
