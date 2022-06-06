@@ -1,16 +1,32 @@
 #!/etc/bin/env bash
-if [ $# == 3 ]; then
-if [ ! -d $1 ]; then echo "No directory specified"
+
+#checkt of het aantal argumenten klopt
+if [ ! $# == 3 ]; then
+    echo "Invalid number of arguments (expected 3, got $#)"
 else
-echo > $3
+
+#checkt of het eerste argument een folder is
+if [ ! -d $1 ]; then
+    echo "No directory specified"
+else
+
+#maakt de logfile aan of maakt de logfile leeg
+echo -n  > $3
+
 for file in $(find $1); do
-$($2 $file &> /dev/null)
-if [ $? == 0 ]; then
-echo "${file}: Success" >> $3
-else echo "${file}: Failure" >> $3
-fi
+    #runt het bestand van de folder met het bijgevoegde commando
+    #en stuurt de output en errors naar /dev/null
+    $($2 $file &> /dev/null)
+
+    #checkt of het commando zonder error is beëindigd
+    #en stuurt het resultaat naar de logfile
+    if [ $? == 0 ]; then
+        echo "${file}: Success" >> $3
+    else
+        echo "${file}: Failure" >> $3
+    fi
 done
+
 fi
 
-else echo "Invalid number of arguments (expected 3, got $#)"
 fi

@@ -1,8 +1,9 @@
 #!/etc/bin/env bash
 
-if [ -z "$1" ]
-then echo "No file specified"
+if [ -z "$1" ]; then
+    echo "No file specified"
 else
+
 case $1 in
 
     *.py)
@@ -16,9 +17,11 @@ case $1 in
     *.cc)
         cat $1
         ;;
+
     *)
         echo "Incorrect file type or path"
         ;;
 
 esac
+
 fi

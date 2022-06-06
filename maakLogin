@@ -1,22 +1,30 @@
 #!/etc/bin/env bash
-if [ $# == 1 ]; then
+
+if [ -z "$1" ]; then
+    echo "No output file specified"
+else
+
 read -p "Enter your username: " NAME
 
 while true; do
-read -p "Enter your password: " PASSWORD
-if (( ${#PASSWORD} < 8 )); then
-echo "Password is not 8 characters long"; continue
-fi
-read -p "Repeat your password: " REPEAT
+    read -p "Enter your password: " PASSWORD
+    #checkt of het opgegeven wachtwoord 8 karakters lang is
+    #en vraagt anders opnieuw om wachtwoord
+    if (( ${#PASSWORD} < 8 )); then
+        echo "Password is not 8 characters long"; continue
+    fi
 
-if [ $PASSWORD == $REPEAT ]; then
-echo "login created"
-MD5=($(echo -n $PASSWORD | md5sum))
-echo "${NAME}:${MD5}" >> $1; break
-else echo "Passwords do not match"; continue
-fi
-
+    read -p "Repeat your password: " REPEAT
+    #checkt of het herhaalde wachtwoord hetzelfde is
+    if [ ! $PASSWORD == $REPEAT ]; then
+        echo "Passwords do not match"; continue
+    else
+        #vertaalt wachtwoord naar md5 hash
+        #en bewaart het in opgegeven bestand
+        MD5=($(echo -n $PASSWORD | md5sum))
+        echo "${NAME}:${MD5}" >> $1
+        echo "login created"; break
+    fi
 done
 
-else echo "No output file given"
 fi

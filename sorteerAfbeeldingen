@@ -1,17 +1,21 @@
 #!/etc/bin/env bash
-if [ -z "$1" ]
-then echo "No directory specified"
+
+if [ -z "$1" ]; then
+    echo "No directory specified"
 else
 
+#maakt de map Afbeeldingen aan als dat niet al bestaat
 if [ ! -d "./Afbeeldingen" ]
-then mkdir Afbeeldingen
+    then mkdir Afbeeldingen
 fi
 
-for file in $(find $1 -name *.jpg)
-do cp $file ./Afbeeldingen
+#kopieert alle .jpg en .png bestanden naar de map Afbeeldingen
+for file in $(find $1 -name *.jpg); do
+    cp $file ./Afbeeldingen
 done
-for file in $(find $1 -name *.png)
-do cp $file ./Afbeeldingen
+for file in $(find $1 -name *.png); do
+    cp $file ./Afbeeldingen
 done
+
 fi
 
