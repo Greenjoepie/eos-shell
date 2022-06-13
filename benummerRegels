@@ -1,4 +1,4 @@
-#!/etc/bin/env bash
+#!/usr/bin/env bash
 
 #benummert de regels van een ingevoerd .txt bestand
 

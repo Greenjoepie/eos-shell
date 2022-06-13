@@ -1,4 +1,4 @@
-#!/etc/bin/env bash
+#!/usr/bin/env bash
 
 #checkt of het aantal argumenten klopt
 if [ ! $# == 3 ]; then
